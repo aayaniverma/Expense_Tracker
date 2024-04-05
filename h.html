@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Analysis Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .pie-chart {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slice {
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+            transition: transform 0.5s;
+            transform-origin: 0 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: #fff;
+            z-index: 1;
+        }
+        .label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #333;
+        }
+        /* Define colors for each slice */
+        .food { background-color: #FF6384; }
+        .travel { background-color: #36A2EB; transform: rotate(51.42deg); }
+        .housing { background-color: #FFCE56; transform: rotate(102.84deg); }
+        .entertainment { background-color: #4BC0C0; transform: rotate(154.26deg); }
+        .education { background-color: #9966FF; transform: rotate(205.68deg); }
+        .groceries { background-color: #FF8A80; transform: rotate(257.1deg); }
+        .miscellaneous { background-color: #A1887F; transform: rotate(308.52deg); }
+    
+        .bar-chart {
+            width: 100%;
+            height: 300px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px 0;
+        }
+        .bar {
+            width: 15%;
+            background-color: #36A2EB;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            padding: 5px 0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <div class="chart">
+                <h2>Expense Analysis (Pie Chart)</h2>
+                <div class="pie-chart">
+                    <div class="slice food"><span class="percentage">20%</span><span class="label">Food</span></div>
+                    <div class="slice travel"><span class="percentage">7%</span><span class="label">Travel</span></div>
+                    <div class="slice housing"><span class="percentage">16%</span><span class="label">Housing</span></div>
+                    <div class="slice entertainment"><span class="percentage">27%</span><span class="label">Entertainment</span></div>
+                    <div class="slice education"><span class="percentage">10%</span><span class="label">Education</span></div>
+                    <div class="slice groceries"><span class="percentage">8%</span><span class="label">Groceries</span></div>
+                    <div class="slice miscellaneous"><span class="percentage">12%</span><span class="label">Miscellaneous</span></div>
+                </div>
+            </div>
+            <div class="chart">
+                <h2>Expense Analysis (Bar Graph)</h2>
+                <div class="bar-chart">
+                    <div class="bar" style="height: 20%;">Food<br>20%</div>
+                    <div class="bar" style="height: 7%;">Travel<br>7%</div>
+                    <div class="bar" style="height: 16%;">Housing<br>16%</div>
+                    <div class="bar" style="height: 27%;">Entertainment<br>27%</div>
+                    <div class="bar" style="height: 10%;">Education<br>10%</div>
+                    <div class="bar" style="height: 8%;">Groceries<br>8%</div>
+                    <div class="bar" style="height: 12%;">Miscellaneous<br>12%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calculate percentage and update slices
+        const slices = document.querySelectorAll('.slice');
+        const total = slices.length;
+        const percentage = 100 / total;
+        let offset = 0;
+
+        slices.forEach((slice, index) => {
+            slice.style.transform += `rotate(${offset}deg)`;
+            slice.innerHTML = `<span class="percentage">${percentage.toFixed(2)}%</span>`;
+            offset += percentage;
+        });
+    </script>
+</body>
+</html>

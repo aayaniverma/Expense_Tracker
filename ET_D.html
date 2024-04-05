@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ET_D.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            drawDonutChart();
+
+            drawAreaChart();
+        }
+
+        function drawDonutChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Category');
+            data.addColumn('number', 'Amount');
+            data.addRows([
+                ['Food', 20],
+                ['Travel', 7],
+                ['Housing', 16],
+                ['Entertainment', 27],
+                ['Education', 10],
+                ['Groceries', 8],
+                ['Miscellaneous', 12]
+            ]);
+
+            var options = {
+                title: 'Daily Expense Analysis',
+                pieHole: 0.55
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donut_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawAreaChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Category');
+            data.addColumn('number', 'Amount');
+            data.addRows([
+                ['Food', 2000],
+                ['Travel', 700],
+                ['Housing', 1600],
+                ['Entertainment', 2700],
+                ['Education', 1000],
+                ['Groceries', 800],
+                ['Miscellaneous', 1200]
+            ]);
+
+            var options = {
+                title: 'Monthly Expense Analysis',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('area_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <img src="logo1.jpg">
+            </div>
+            <div class="side">
+                <a href="ET_D.html" class="light"><span class="material-symbols-sharp">dashboard</span><h3>Dashboard</h3></a><br>
+                <a href="ET_EL.html"><span class="material-symbols-sharp">currency_rupee</span><h3>Expense Logging</h3></a><br>
+                <a href="ET_BM.html"><span class="material-symbols-sharp">savings</span><h3>Budget Management</h3></a><br>
+                <a href="ET_S.html"><span class="material-symbols-sharp">payments</span><h3>Split</h3></a><br>  
+            </div>
+        </aside>
+        <main>
+            <h1>Dashboard</h1><br>
+            <h2>Expense Analysis</h2><br>
+            <div id="donut_chart" style="width: 500px; height: 250px;"></div><br>
+            <div id="area_chart" style="width: 750px; height: 250px;"></div>
+            
+            
+            
+
+        </main>
+    </div>
+
+
+</body>
+</html>

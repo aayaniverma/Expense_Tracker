@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ET_EL.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <script>
+        function addExpense() {
+            var category = document.getElementById("category").value;
+            var amount = parseFloat(document.getElementById("amount").value);
+        
+            var listItem = document.createElement("li");
+            listItem.textContent = category + ": Rs." + amount.toFixed(2);
+        
+            document.getElementById("expenseList").appendChild(listItem);
+        
+            document.getElementById("category").value = "";
+            document.getElementById("amount").value = "";
+        }
+        
+        function calculateTotal() {
+            var expenseItems = document.querySelectorAll("#expenseList li");
+        
+            var total = 0;
+            for (var i = 0; i < expenseItems.length; i++) {
+                var amountString = expenseItems[i].textContent.split(": Rs.")[1];
+                var amount = parseFloat(amountString);
+                total += amount;
+            }
+        
+            document.getElementById("total").textContent = "Total: Rs." + total.toFixed(2);
+        }
+        </script>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <img src="logo1.jpg">
+
+            </div>
+            <div class="side">
+                <a href="ET_D.html"><span class="material-symbols-sharp">dashboard</span><h3>Dashboard</h3></a><br>
+                <a href="ET_EL.html" class="light"><span class="material-symbols-sharp">currency_rupee</span><h3>Expense Logging</h3></a><br>
+                <a href="ET_BM.html"><span class="material-symbols-sharp">savings</span><h3>Budget Management</h3></a><br>
+                <a href="ET_S.html"><span class="material-symbols-sharp">payments</span><h3>Split</h3></a><br>
+            </div>
+        </aside>
+        <main>
+            <h1>Expense Logging</h1><br><br>
+            <div class="in">
+            <form id="expenseForm">
+                <label for="category">Select Category:</label>
+                <select id="category" name="category">
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Education">Education</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select><br>
+                <br><br>
+                <label for="amount">Enter Amount:</label>&nbsp; 
+                <input type="number" id="amount" name="amount" required><br>
+                <br>
+                <div class="ad">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" onclick="addExpense()">+ Add</button>
+                </div>
+                
+            
+            
+            <div id="expenseList"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" onclick="calculateTotal()">Total</button></form>
+            <div id="total"></div></div>
+
+        </main>
+    </div>
+
+
+</body>
+</html>

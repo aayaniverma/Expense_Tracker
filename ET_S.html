@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ET_S.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
+        function createInputs() {
+    var numPeople = parseInt(document.getElementById("numPeople").value);
+    var peopleInputsDiv = document.getElementById("peopleInputs");
+    peopleInputsDiv.innerHTML = ''; 
+    
+    for (var i = 0; i < numPeople; i++) {
+        var label = document.createElement("label");
+        label.for = "person" + (i + 1);
+        label.textContent = "Name of Person " + (i + 1) + ": ";
+        
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "person" + (i + 1);
+        
+        peopleInputsDiv.appendChild(label);
+        peopleInputsDiv.appendChild(input);
+        peopleInputsDiv.appendChild(document.createElement("br"));
+        peopleInputsDiv.appendChild(document.createElement("br"));
+    }
+}
+
+function calculateSplit() {
+    var totalBill = parseFloat(document.getElementById("totalBill").value);
+    var numPeople = parseInt(document.getElementById("numPeople").value);
+    
+    if (isNaN(totalBill) || isNaN(numPeople) || totalBill <= 0 || numPeople <= 0) {
+        document.getElementById("output").innerText = "Please enter valid numbers.";
+        return;
+    }
+    
+    var amounts = {};
+    var totalAmount = 0;
+    
+    for (var i = 0; i < numPeople; i++) {
+        var personInput = document.getElementById("person" + (i + 1));
+        var personName = personInput.value.trim();
+        if (personName === "") {
+            document.getElementById("output").innerText = "Please enter a name for all people.";
+            return;
+        }
+        amounts[personName] = 0;
+    }
+    
+    for (var person in amounts) {
+        amounts[person] = totalBill / numPeople;
+        totalAmount += amounts[person];
+    }
+    
+    document.getElementById("output").innerHTML = "<h2>Amount per person:</h2><br>";
+    for (var person in amounts) {
+        document.getElementById("output").innerHTML += "<p>" + person + ": Rs." + amounts[person].toFixed(2) + "</p><br>";
+        
+    }
+}
+        </script>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <img src="logo1.jpg">
+
+            </div>
+            <div class="side">
+                <a href="ET_D.html"><span class="material-symbols-sharp">dashboard</span><h3>Dashboard</h3></a><br>
+                <a href="ET_EL.html"><span class="material-symbols-sharp">currency_rupee</span><h3>Expense Logging</h3></a><br>
+                <a href="ET_BM.html"><span class="material-symbols-sharp">savings</span><h3>Budget Management</h3></a><br>
+                <a href="ET_S.html" class="light"><span class="material-symbols-sharp">payments</span><h3>Split</h3></a><br>  
+            </div>
+        </aside>
+        <main>
+            <h1>Split</h1><br><br><div class="in">
+            <label for="totalBill">Total Bill Amount: Rs.</label>
+            <input type="number" id="totalBill" min="0"><br><br>
+
+            <label for="numPeople">Number of People:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" id="numPeople" min="1" onchange="createInputs()"><br><br>
+            <div id="peopleInputs"></div><br><br>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <button onclick="calculateSplit()">Calculate</button><br><br>
+
+            <div id="output"></div></div>
+            
+
+
+        </main>
+    </div>
+
+
+</body>
+</html>

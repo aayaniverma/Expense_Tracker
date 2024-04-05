@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ET_BM.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <script>
+        var totalBudget = 0;
+        var totalExpense = 0;
+        
+        function setTotalBudget() {
+            totalBudget = parseFloat(document.getElementById("totalBudget").value);
+        }
+        
+        function addExpense() {
+            if (totalBudget === 0) {
+                setTotalBudget();
+            }
+        
+            var category = document.getElementById("category").value;
+            var amount = parseFloat(document.getElementById("amount").value);
+        
+            var listItem = document.createElement("li");
+            listItem.textContent = category + ": Rs." + amount.toFixed(2);
+        
+            document.getElementById("expenseList").appendChild(listItem);
+        
+            totalExpense += amount;
+            document.getElementById("totalBudgetAmount").textContent = "Total Spent: Rs."+ totalExpense.toFixed(2);
+        
+            document.getElementById("category").value = "";
+            document.getElementById("amount").value = "";
+        }
+        
+        function calculateTotal() {
+            var remainingBudget = totalBudget - totalExpense;
+            document.getElementById("remainingBudget").textContent = "Extra Left Amount: Rs." + remainingBudget.toFixed(2) ;
+        }
+        </script>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <img src="logo1.jpg">
+
+            </div>
+            <div class="side">
+                <a href="ET_D.html"><span class="material-symbols-sharp">dashboard</span><h3>Dashboard</h3></a><br>
+                <a href="ET_EL.html"><span class="material-symbols-sharp">currency_rupee</span><h3>Expense Logging</h3></a><br>
+                <a href="ET_BM.html" class="light"><span class="material-symbols-sharp">savings</span><h3>Budget Management</h3></a><br>
+                <a href="ET_S.html"><span class="material-symbols-sharp">payments</span><h3>Split</h3></a><br>  
+            </div>
+        </aside>
+        <main>
+            <h1>Budget Management</h1><br><br>
+            <div class="in">
+            <form id="budgetForm">
+                <label for="totalBudget">Starting Total Budget:</label>
+                <input type="number" id="totalBudget" name="totalBudget" required><br><br><br>
+            </form>
+            
+            <form id="expenseForm">
+                <label for="category">Select Category:</label>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;  
+                <select id="category" name="category">
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Education">Education</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select><br>
+                <br><br>
+                <label for="amount">Enter Amount:</label>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+                <input type="number" id="amount" name="amount" required><br><br>
+                <br>
+                <div class="ad">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <button type="button" onclick="addExpense()">+ Add</button></div>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                <button type="button" onclick="calculateTotal()">Calculate Total</button>
+            </form>
+            
+            <div id="expenseList"></div>
+            <div id="totalBudgetAmount"></div>
+            <div id="remainingBudget"></div></div>
+
+        </main>
+    </div>
+
+
+</body>
+</html>
